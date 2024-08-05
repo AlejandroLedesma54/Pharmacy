@@ -8,6 +8,7 @@ import {
     AutoIncrement,
     DeletedAt,
     HasMany,
+    AfterCreate,
 } from 'sequelize-typescript';
 
 @Table({
@@ -60,5 +61,13 @@ export default class MedicineModel extends Model<MedicineModel>{
 
     @HasMany(() => InventoryModel)
     inventories!: InventoryModel[]
+
+    // @AfterCreate
+    // static async createInventory(instance: MedicineModel){
+    //     await InventoryModel.create({
+    //         medicineId: instance.id,
+    //         status: 'available'
+    //     })
+    // }
 
 }

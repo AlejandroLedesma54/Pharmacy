@@ -5,6 +5,8 @@ import { Dialect } from "sequelize";
 import { strUnd } from "../interfaces/types";
 import MedicineModel from "../models/medicineModel";
 import InventoryModel from "../models/inventoryModel";
+import PatientModel from "../models/patientModel";
+import DoctorModel from "../models/doctorModel";
 
 config({path: resolve(__dirname, "../../.env")});
 
@@ -25,8 +27,58 @@ const sequelize = new Sequelize({
     username: dbUserName,
     password: dbPassword,
     database: dbName,
-    models: [MedicineModel, InventoryModel]
+    models: [MedicineModel, InventoryModel, PatientModel, DoctorModel]
 });
+
+InventoryModel.belongsToMany(MedicineModel, { through: 'OrderProducts' });
+MedicineModel.belongsToMany(InventoryModel, { through: 'OrderProducts' });
+
+
+// // Definir relaciones muchos a muchos
+// InventoryModel.belongsToMany(MedicineModel, { through: 'OrderProducts' });
+// MedicineModel.belongsToMany(InventoryModel, { through: 'OrderProducts' });
+
+// // Definir relación uno a uno
+// PatientModel.hasOne(DoctorModel, { foreignKey: 'patientId' });
+// DoctorModel.belongsTo(PatientModel, { foreignKey: 'patientId' });
 
 export default sequelize;
 
+
+
+// import PatientModel from './models/patientModel';
+// import DoctorModel from './models/doctorModel';
+
+// // Crear un paciente y asignarle un doctor
+// async function createPatientWithDoctor() {
+//     const patient = await PatientModel.create({ name: 'John Doe' });
+//     const doctor = await DoctorModel.create({ name: 'Dr. Smith', patientId: patient.id });
+//     console.log('Paciente y doctor creados:', patient, doctor);
+// }
+
+// // Obtener el doctor de un paciente
+// async function getDoctorOfPatient(patientId: number) {
+//     const patient = await PatientModel.findByPk(patientId, { include: DoctorModel });
+//     if (patient) {
+//         console.log('Doctor del paciente:', patient.Doctor);
+//     } else {
+//         console.log('Paciente no encontrado');
+//     }
+// }
+
+// // Actualizar el doctor de un paciente
+// async function updateDoctorOfPatient(patientId: number, newDoctorName: string) {
+//     const patient = await PatientModel.findByPk(patientId);
+//     if (patient) {
+//         const doctor = await patient.getDoctor();
+//         if (doctor) {
+//             doctor.name = newDoctorName;
+//             await doctor.save();
+//             console.log('Doctor actualizado:', doctor);
+//         } else {
+//             console.log('Doctor no encontrado');
+//         }
+//     } else {
+//         console.log('Paciente no encontrado');
+//     }
+// }

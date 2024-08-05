@@ -10,7 +10,8 @@ import{
     HasMany,
     CreatedAt,
     UpdatedAt,
-    DeletedAt
+    DeletedAt,
+    AfterCreate
 } from 'sequelize-typescript';
 
 @Table({
@@ -60,3 +61,4 @@ export default class InventoryModel extends Model<InventoryModel>{
     deletedAt!: Date;
 
 }
+

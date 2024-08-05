@@ -8,14 +8,13 @@ export default class InventoryService {
     async validateExpiredDate(): Promise<void>{
         const inventories = await this.inventoryRepository.findExpiredInventories();
 
-        inventories.forEach(async (inventory) => {
-            if(inventory.status !== 'not_available_expired'){
+        for (const inventory of inventories) {
+            if (inventory.status !== 'not_available_expired') {
                 inventory.status = 'not_available_expired';
-                if (inventory.save) {
-                    await inventory.save();
-                }
+                await inventory.save();
+                
             }
-        });
+        }
         
     }
     async findAllInventory(): Promise<any[]> {
