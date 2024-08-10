@@ -1,4 +1,4 @@
-import MedicineRepository from "../repositories/medicineRepository";
+import MedicineRepository from "../repositories/productRepository";
 import { injectable, inject } from "tsyringe";
 
 @injectable()

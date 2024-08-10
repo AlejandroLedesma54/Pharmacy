@@ -6,58 +6,56 @@ import {
     PrimaryKey,
     AutoIncrement,
     DeletedAt,
-    HasMany,
-    AfterCreate,
     UpdatedAt,
     CreatedAt,
 } from 'sequelize-typescript';
 
 @Table({
-    tableName: "doctor",
+    tableName: "physician",
     timestamps: true,
 })
 
-export default class DoctorModel extends Model<DoctorModel>{
+export default class PhysicianModel extends Model<PhysicianModel> {
     @PrimaryKey
     @AutoIncrement
     @Column({
         type: DataType.INTEGER
     })
-    id!: number
+    id!: number;
 
     @Column({
         type: DataType.STRING,
         allowNull: false
     })
-    name!: string
+    fullName!: string;
 
     @Column({
         type: DataType.STRING,
         allowNull: false
     })
-    phone!: string
+    contactNumber!: string;
 
     @Column({
         type: DataType.STRING,
         allowNull: false
     })
-    email!: string
+    emailAddress!: string;
 
     @UpdatedAt
     @Column({
         type: DataType.DATE
     })
-    updatedAt!: Date
+    updatedAt!: Date;
 
     @DeletedAt
     @Column({
         type: DataType.DATE
     })
-    deletedAt!: Date
+    deletedAt!: Date;
 
     @CreatedAt
     @Column({
         type: DataType.DATE
     })
-    createdAt!: Date
+    createdAt!: Date;
 }

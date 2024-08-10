@@ -1,9 +1,8 @@
-export interface medicineType{
+export interface ProductType {
     id?: number;
     name: string;
-    expiredDate: Date;
+    expirationDate: Date;
     price: number;
     quantity: number;
     deletedAt?: Date;
-
 }

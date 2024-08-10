@@ -1,10 +1,10 @@
 import { container } from "tsyringe";
-import InventoryRepository from "../repositories/invetoryRepository";
+import StockRepository from "../repositories/inventoryRepository"; 
 import InventoryService from "../services/inventoryService";
-import MedicineRepository from "../repositories/medicineRepository";
-import MedicineService from "../services/medicineService";
+import MedicineRepository from "../repositories/productRepository";
+import MedicineService from "../services/productService";
 
-container.registerSingleton<InventoryRepository>("InventoryRepository", InventoryRepository);
+container.registerSingleton<StockRepository>("InventoryRepository", StockRepository);
 container.registerSingleton<InventoryService>("InventoryService", InventoryService);
 container.registerSingleton<MedicineRepository>("MedicineRepository", MedicineRepository);
 container.registerSingleton<MedicineService>("MedicineService", MedicineService);

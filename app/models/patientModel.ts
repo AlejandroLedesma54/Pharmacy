@@ -13,52 +13,51 @@ import {
 } from 'sequelize-typescript';
 
 @Table({
-    tableName: "patient",
+    tableName: "customer",
     timestamps: true,
 })
 
-export default class PatientModel extends Model<PatientModel>{
+export default class CustomerModel extends Model<CustomerModel> {
     @PrimaryKey
     @AutoIncrement
     @Column({
         type: DataType.INTEGER
     })
-    id!: number
+    id!: number;
 
     @Column({
         type: DataType.STRING,
         allowNull: false
     })
-    name!: string
-
-
-    @Column({
-        type: DataType.STRING,
-        allowNull: false
-    })
-    phone!: string
+    fullName!: string;
 
     @Column({
         type: DataType.STRING,
         allowNull: false
     })
-    email!: string
+    contactNumber!: string;
+
+    @Column({
+        type: DataType.STRING,
+        allowNull: false
+    })
+    emailAddress!: string;
 
     @UpdatedAt
     @Column({
         type: DataType.DATE
     })
-    updatedAt!: Date
+    updatedAt!: Date;
 
     @DeletedAt
     @Column({
         type: DataType.DATE
     })
-    deletedAt!: Date
+    deletedAt!: Date;
 
-    @CreatedAt 
+    @CreatedAt
     @Column({
         type: DataType.DATE
     })
-    createdAt!: Date
+    createdAt!: Date;
 }

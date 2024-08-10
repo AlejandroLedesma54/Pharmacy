@@ -1,4 +1,4 @@
-import InventoryModel from './inventoryModel';
+import StockModel from './inventoryModel';
 import {
     Table,
     Column,
@@ -12,40 +12,39 @@ import {
 } from 'sequelize-typescript';
 
 @Table({
-    tableName: "medicine",
+    tableName: "product",
     timestamps: true,
-    paranoid: true // Habilita soft delete
 })
 
-export default class MedicineModel extends Model<MedicineModel>{
-    static atributes(arg0: string, atributes: any, arg2: {}){
+export default class ProductModel extends Model<ProductModel> {
+    static attributes(arg0: string, attributes: any, arg2: {}) {
         throw new Error("Method not implemented.");
     }
+
     @PrimaryKey
     @AutoIncrement
     @Column({
         type: DataType.INTEGER
     })
-    id!: number
-
+    id!: number;
 
     @Column({
         type: DataType.STRING,
         allowNull: false
     })
-    name!: string
+    name!: string;
 
     @Column({
         type: DataType.DATE,
         allowNull: false
     })
-    expiredDate! : Date
+    expiryDate!: Date;
 
     @Column({
         type: DataType.DECIMAL,
         allowNull: false
     })
-    price!: number
+    price!: number;
 
     @Column({
         type: DataType.INTEGER,
@@ -57,17 +56,8 @@ export default class MedicineModel extends Model<MedicineModel>{
     @Column({
         type: DataType.DATE
     })
-    deletedAt!: Date
+    deletedAt!: Date;
 
-    @HasMany(() => InventoryModel)
-    inventories!: InventoryModel[]
-
-    // @AfterCreate
-    // static async createInventory(instance: MedicineModel){
-    //     await InventoryModel.create({
-    //         medicineId: instance.id,
-    //         status: 'available'
-    //     })
-    // }
-
+    @HasMany(() => StockModel)
+    stocks!: StockModel[];
 }

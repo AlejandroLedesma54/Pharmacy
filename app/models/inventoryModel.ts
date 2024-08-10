@@ -1,5 +1,5 @@
-import MedicineModel from './medicineModel';
-import{
+import ProductModel from './productModel';
+import {
     Table,
     Column,
     Model,
@@ -7,33 +7,31 @@ import{
     PrimaryKey,
     AutoIncrement,
     ForeignKey,
-    HasMany,
     CreatedAt,
     UpdatedAt,
     DeletedAt,
-    AfterCreate
 } from 'sequelize-typescript';
 
 @Table({
-    tableName: "inventory",
+    tableName: "stock",
     timestamps: true,
-    paranoid: true // Habilita soft delete
+
 })
 
-export default class InventoryModel extends Model<InventoryModel>{
+export default class StockModel extends Model<StockModel> {
     @PrimaryKey
     @AutoIncrement
     @Column({
         type: DataType.INTEGER
     })
-    id!:number;
+    id!: number;
 
-    @ForeignKey(() => MedicineModel)
+    @ForeignKey(() => ProductModel)
     @Column({
         type: DataType.INTEGER,
         allowNull: false
     })
-    medicineId!: number;
+    productId!: number;
 
     @Column({
         type: DataType.ENUM,
@@ -59,6 +57,4 @@ export default class InventoryModel extends Model<InventoryModel>{
         type: DataType.DATE
     })
     deletedAt!: Date;
-
 }
-

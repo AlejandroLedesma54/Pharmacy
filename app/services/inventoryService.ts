@@ -1,4 +1,4 @@
-import InventoryRepository from "../repositories/invetoryRepository";
+import InventoryRepository from "../repositories/inventoryRepository";
 import { injectable, inject } from "tsyringe";
 
 @injectable()

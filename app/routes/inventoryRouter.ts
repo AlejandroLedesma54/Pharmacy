@@ -1,7 +1,7 @@
 import { Router } from 'express';
-import InventoryController from '../controllers/inventoryController';
+import StockController from '../controllers/inventoryController';
 
+const stockRouter = Router();
+stockRouter.get('/', StockController.getStock);
 
-const inventoryRouter = Router();
-inventoryRouter.get('/', InventoryController.getInventory);
-
+export default stockRouter;

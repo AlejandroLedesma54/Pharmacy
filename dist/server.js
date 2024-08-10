@@ -7,8 +7,8 @@ require("reflect-metadata");
 const express_1 = __importDefault(require("express"));
 const dotenv_1 = require("dotenv");
 (0, dotenv_1.config)();
-const PORT = process.env.PORT || 3001;
-const app = (0, express_1.default)();
-app.listen(PORT, () => {
-    console.log("Server is running in port", PORT);
+const SERVER_PORT = process.env.SERVER_PORT || 4000;
+const serverApp = (0, express_1.default)();
+serverApp.listen(SERVER_PORT, () => {
+    console.log("Server is running on port", SERVER_PORT);
 });

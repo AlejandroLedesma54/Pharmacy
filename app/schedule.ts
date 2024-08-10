@@ -1,10 +1,10 @@
 import cron from 'node-cron';
 import { container } from 'tsyringe';
-import InventoryService from './services/inventoryService';
+import StockService from './services/inventoryService';
 
-const inventoryService = container.resolve(InventoryService);
+const stockService = container.resolve(StockService);
 
 cron.schedule('25 0 * * *', async () => {
-    console.log('Ejecutando tarea de validación de fecha de vencimiento a la medianoche');
-    await inventoryService.validateExpiredDate();
+    console.log('Running expiration date validation task at midnight');
+    await stockService.validateExpiryDate();
 });

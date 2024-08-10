@@ -1,43 +1,41 @@
 import 'reflect-metadata';
-import './config/container';
-import './schedule';
-import express, { Application } from 'express';
-import sequelize from './config/database';
+import './config/diContainer';
+import './scheduler';
+import express, { Application as ExpressApp } from 'express';
+import database from './config/database';
 import cors from 'cors';
-import { config } from 'dotenv';
-import mainRouter from './routes/Router';
-import errorHandler from './middlewares/errorHandler';
+import { config as loadEnv } from 'dotenv';
+import apiRouter from './routes/apiRouter';
+import handleErrors from './middlewares/errorHandler';
 
-config();
+loadEnv();
 
-const PORT: number | string = process.env.PORT || 3001;
-const app: Application = express();
+const SERVER_PORT: number | string = process.env.SERVER_PORT || 4000;
+const serverApp: ExpressApp = express();
 
-const corsOptions = {
-    origin: "http://localhost:4000",
+const corsConfig = {
+    origin: "http://localhost:5000",
     methods: "GET, HEAD, PUT, PATCH, POST, DELETE",
     allowedHeaders: "Content-Type, Authorization",
     credentials: true
 };
 
-app.use(cors(corsOptions));
-app.use(express.json());
-app.use("/app", mainRouter);
-app.use(errorHandler)
+serverApp.use(cors(corsConfig));
+serverApp.use(express.json());
+serverApp.use("/api", apiRouter);
+serverApp.use(handleErrors);
 
-
-const startServer = async (): Promise<void> => {
-    try{
-       await sequelize.authenticate();
-       console.log("Connection has been extablished successfuly");
-       await sequelize.sync();
-       app.listen(PORT, () => {
-            console.log("Server is running on port", PORT);        
-       })
-    }catch(err: any){
-        console.error("There was an error trying to connet the database", err)
+const initializeServer = async (): Promise<void> => {
+    try {
+        await database.authenticate();
+        console.log("Database connection established successfully");
+        await database.sync();
+        serverApp.listen(SERVER_PORT, () => {
+            console.log("Server is up and running on port", SERVER_PORT);
+        });
+    } catch (error: any) {
+        console.error("Failed to connect to the database", error);
     }
 };
 
-
-startServer();
+initializeServer();
