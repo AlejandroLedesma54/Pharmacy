@@ -20,10 +20,11 @@ This project is a Pharmacy Management System that allows you to manage medicines
 npm install
 
 3. Set up environment variables in a .env file.
+
 4. Compile TypeScript:
 
 npm run build
 
 5. Run the application:
-6. 
+   
 npm start
